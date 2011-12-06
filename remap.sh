@@ -6,19 +6,19 @@ OUTPUT=$2 #"./survival/"
 
 #surface renders:
 # overhead
-echo "Running overhead..."
-CMD=$MAPPER" -w "$WORLD" -o "$OUTPUT"overhead.png"
-$CMD
+#echo "Running overhead..."
+#CMD=$MAPPER" -w "$WORLD" -o "$OUTPUT"overhead.png"
+#$CMD
 
 # overhead night
-echo "Running night..."
-CMD=$MAPPER" -n -w "$WORLD" -o "$OUTPUT"overheadnight.png"
-$CMD
+#echo "Running night..."
+#CMD=$MAPPER" -n -w "$WORLD" -o "$OUTPUT"overheadnight.png"
+#$CMD
 
 # overhead
-echo "Running overhead nether..."
-CMD=$MAPPER" --hell-mode -w "$WORLD"/DIM-1 -N -o "$OUTPUT"overhead-nether.png"
-$CMD
+#echo "Running overhead nether..."
+#CMD=$MAPPER" --hell-mode -w "$WORLD"/DIM-1 -N -o "$OUTPUT"overhead-nether.png"
+#$CMD
 
 # fatiso
 echo "Running fatiso..."
@@ -52,13 +52,13 @@ $CMD
 
 #cave renders
 # overhead
-echo "Running caves..."
-CMD=$MAPPER" -c -w "$WORLD" -o "$OUTPUT"cave.png"
-$CMD
+#echo "Running caves..."
+#CMD=$MAPPER" -c -w "$WORLD" -o "$OUTPUT"cave.png"
+#$CMD
 
-echo "Running players..."
-CMD=$MAPPER" --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf --show-players -w "$WORLD" -o "$OUTPUT"players.png"
-$CMD
+#echo "Running players..."
+#CMD=$MAPPER" --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf --show-players -w "$WORLD" -o "$OUTPUT"players.png"
+#$CMD
 
 #echo "Running players nether..."
 #CMD=$MAPPER" --hell-mode --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf --show-players -w "$WORLD"/DIM-1 -o "$OUTPUT"players-nether.png"
