@@ -4,5 +4,5 @@
 
 ./fetch-mc1.sh
 
-./remap-lite.sh "minecraft/world" "mc1/"
+./remap-lite.sh "mc1-world" "mc1/"
 
