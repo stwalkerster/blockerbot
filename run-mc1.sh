@@ -6,3 +6,4 @@
 
 ./remap.sh "mc1-world" "mc1/"
 
+./backup.sh
