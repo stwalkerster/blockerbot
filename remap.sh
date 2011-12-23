@@ -66,4 +66,4 @@ $CMD
 
 
 echo "Deleting swap file..."
-rm /home/stwalkerster/c10t/swap.bin
+rm -f /home/stwalkerster/c10t/swap.bin

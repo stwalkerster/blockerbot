@@ -3,10 +3,10 @@
 $url = "https://s3-eu-west-1.amazonaws.com/minecraft-worlds/smp/mc1/";
 $pw = "Help2204Bot";
 $un = "Helpmebot";
-$page = "Template:Mc1-backup";
+$page = "Minecraft Backups";
 
 
-$text = "";
+$text = "This is a list of all the available world backups for the \"MC1\" server:\n\n";
 
 $result = shell_exec("s3cmd ls s3://minecraft-worlds/smp/mc1/2");
 $result = explode("\n", $result);
@@ -86,7 +86,9 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 
-$token = $apiresult["query"]["pages"]["629"]["edittoken"];
+$token = "";
+foreach($apiresult["query"]["pages"] as $fragment)
+	$token = $fragment["edittoken"];
 
 ////////////////// EDIT
 
@@ -101,7 +103,6 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 
-print_r($data);
 
 print_r($apiresult);
 
