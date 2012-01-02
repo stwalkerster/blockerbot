@@ -62,7 +62,7 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Login part 1:"
+echo "########## Login part 1:";
 print_r($apiresult);
 
 $apiresult = httpRequest($api, array(
@@ -75,7 +75,7 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Login part 2:"
+echo "########## Login part 2:";
 print_r($apiresult);
 
 /////////////// GET EDIT TOKEN
@@ -89,7 +89,7 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Edit token:"
+echo "########## Edit token:";
 print_r($apiresult);
 
 $token = "";
@@ -109,7 +109,7 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 
-echo "########## Edit completion:"
+echo "########## Edit completion:";
 print_r($apiresult);;
 
 
