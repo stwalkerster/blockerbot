@@ -28,7 +28,7 @@ amazonsssurl="s3://minecraft-worlds/smp/mc1/"
 
 maps=""
 
-while getopts ":bc:hls" opt; do
+while getopts ":bc:hlsw" opt; do
 case $opt in
   b)
 	echo "##### Running backup to S3"
