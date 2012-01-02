@@ -1,7 +1,18 @@
 #!/bin/bash
 
+# crontab
+# 0 3 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 6 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl>/dev/null
+# 0 9 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 12 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 15 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 18 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 21 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
+# 0 0 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sbwlh >/dev/null
+
+
 # Usage:
-# -b		Backup script
+# -b		Backup to s3
 # -c <list>	Custom set of maps
 # -h		Heavy maps
 # -l		Light maps
@@ -39,8 +50,6 @@ case $opt in
 	bzip2 $date.tar
 	echo "########## Uploading"
 	s3cmd put $date.tar.bz2 $amazonsssurl
-	echo "########## Linking new backup"
-	php updateWiki.php
 	rm $date.tar.bz2
 	echo "##### Done backup"
     ;;
@@ -139,3 +148,7 @@ for i in $maps; do
 	echo "########## "$i" = "$command
 	$command
 done
+
+echo "##### Cleaning up"
+
+rm -f c10t.log cookies.tmp swap.bin
