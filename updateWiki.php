@@ -62,6 +62,8 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
+echo "########## Login part 1:"
+print_r($apiresult);
 
 $apiresult = httpRequest($api, array(
 	"format" => "php",
@@ -73,6 +75,8 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
+echo "########## Login part 2:"
+print_r($apiresult);
 
 /////////////// GET EDIT TOKEN
 
@@ -85,6 +89,8 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
+echo "########## Edit token:"
+print_r($apiresult);
 
 $token = "";
 foreach($apiresult["query"]["pages"] as $fragment)
@@ -103,7 +109,7 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 
-
-print_r($apiresult);
+echo "########## Edit completion:"
+print_r($apiresult);;
 
 
