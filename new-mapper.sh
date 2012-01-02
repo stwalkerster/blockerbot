@@ -6,6 +6,7 @@
 # -h		Heavy maps
 # -l		Light maps
 # -s		Sync from game server
+# -w		Update backup list on-wiki
 
 # Requirements:
 # * c10t
@@ -60,6 +61,10 @@ case $opt in
 	rsync -avz -e "ssh -i $REMOTEKEY" $REMOTEWORLD $WORLD
 	echo "##### Done sync"
     ;;
+  w)
+	echo "##### Updating wiki backup list"
+	php updateWiki.php
+	;;
   \?)
     echo "Invalid option: -$OPTARG" >&2
     exit 1
