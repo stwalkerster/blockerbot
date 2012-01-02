@@ -62,7 +62,7 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Login part 1:";
+echo "########## Login part 1:\n";
 
 if($apiresult["login"]["result"] != "NeedToken")
 	die( "Login: {$apiresult["login"]["result"]}");
@@ -77,7 +77,7 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Login part 2:";
+echo "########## Login part 2:\n";
 
 if($apiresult["login"]["result"] != "Success")
 	die( "Login: {$apiresult["login"]["result"]}");
@@ -93,13 +93,17 @@ $apiresult = httpRequest($api, array(
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Edit token:";
-print_r($apiresult);
+echo "########## Edit token:\n";
 
 $token = "";
 foreach($apiresult["query"]["pages"] as $fragment)
-	$token = $fragment["edittoken"];
-
+	if(isset($fragment["edittoken"]))
+		$token = $fragment["edittoken"];
+		
+if($token == ""){
+	print_r($apiresult);
+	die();
+}
 ////////////////// EDIT
 
 $apiresult = httpRequest($api, array(
@@ -113,7 +117,8 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 
-echo "########## Edit completion:";
-print_r($apiresult);;
+echo "########## Edit completion:\n";
 
+if($apiresult["edit"]["result"] != "Success")
+	die( "Login: {$apiresult["login"]["result"]}");
 
