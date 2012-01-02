@@ -32,9 +32,13 @@ case $opt in
   b)
 	echo "##### Running backup to S3"
     date=`date +%FT%H%M%SZ`
+	echo "########## Adding to tarball"
 	tar -cf "$date.tar" mc1-world/
+	echo "########## Compressing tarball"
 	bzip2 $date.tar
+	echo "########## Uploading"
 	s3cmd put $date.tar.bz2 $amazonsssurl
+	echo "########## Linking new backup"
 	php updateWiki.php
 	rm $date.tar.bz2
 	echo "##### Done backup"
@@ -70,8 +74,11 @@ done
 echo
 echo "Queue:" $maps
 echo
-
+echo "##### Starting render jobs"
 for i in $maps; do
+	
+	mapperopts=""
+	subworld=""
 	case $opt in
 		overhead)
 			mapperopts=""
@@ -122,5 +129,8 @@ for i in $maps; do
 			subworld="DIM-1"
 			;;
 	esac
-	$MAPPER" "$mapperopts" -w "$WORLD"/"$subworld" -o "$OUTPUT$i".png"
+	
+	command=$MAPPER" "$mapperopts" -w "$WORLD"/"$subworld" -o "$OUTPUT$i".png"
+	echo "########## "$command
+	$command
 done
