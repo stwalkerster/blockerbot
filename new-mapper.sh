@@ -79,7 +79,7 @@ for i in $maps; do
 	
 	mapperopts=""
 	subworld=""
-	case $opt in
+	case $i in
 		overhead)
 			mapperopts=""
 			subworld=""
