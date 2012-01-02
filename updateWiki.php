@@ -63,7 +63,9 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 echo "########## Login part 1:";
-print_r($apiresult);
+
+if($apiresult["login"]["result"] != "NeedToken")
+	die( "Login: {$apiresult["login"]["result"]}");
 
 $apiresult = httpRequest($api, array(
 	"format" => "php",
@@ -76,7 +78,9 @@ $apiresult = httpRequest($api, array(
 
 $apiresult = unserialize($apiresult);
 echo "########## Login part 2:";
-print_r($apiresult);
+
+if($apiresult["login"]["result"] != "Success")
+	die( "Login: {$apiresult["login"]["result"]}");
 
 /////////////// GET EDIT TOKEN
 
