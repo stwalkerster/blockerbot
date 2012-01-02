@@ -136,6 +136,6 @@ for i in $maps; do
 	esac
 	
 	command=$MAPPER" "$mapperopts" -w "$WORLD"/"$subworld" -o "$OUTPUT$i".png"
-	echo "########## "$command
+	echo "########## "$i" = "$command
 	$command
 done
