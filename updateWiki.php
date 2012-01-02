@@ -1,8 +1,8 @@
 <?php
 
 $url = "https://s3-eu-west-1.amazonaws.com/minecraft-worlds/smp/mc1/";
-$pw = "Help2204Bot";
-$un = "Helpmebot";
+$pw = file_get_contents("wiki.password");
+$un = "Minecraftbackupscript";
 $page = "Minecraft Backups";
 
 
