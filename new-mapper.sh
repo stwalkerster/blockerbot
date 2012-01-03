@@ -134,6 +134,10 @@ for i in $maps; do
 			mapperopts="-c"
 			subworld=""
 			;;
+		cave-fatiso)
+			mapperopts="-c -Z"
+			subworld=""
+			;;
 		players)
 			mapperopts="--show-players"
 			subworld=""
