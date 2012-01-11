@@ -48,8 +48,17 @@ case $opt in
 	tar -cf "$date.tar" mc1-world/
 	echo "########## Compressing tarball"
 	bzip2 $date.tar
-	echo "########## Uploading"
-	s3cmd put $date.tar.bz2 $amazonsssurl
+	echo "########## Verifying MD5"
+	LASTSUM=`cat lastmd5`
+	THISSUM=`md5sum $date.tar.bz2 | awk '{print $1}'`
+	echo $THISSUM > lastmd5
+	if [ "$LASTSUM" != "$THISSUM" ];
+	then
+		echo "########## Uploading"
+#		s3cmd put $date.tar.bz2 $amazonsssurl
+	else
+		echo "########## MD5 matches, skipping upload"
+	fi
 	rm $date.tar.bz2
 	echo "##### Done backup"
     ;;
