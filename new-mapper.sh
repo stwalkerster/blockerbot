@@ -55,7 +55,7 @@ case $opt in
 	if [ "$LASTSUM" != "$THISSUM" ];
 	then
 		echo "########## Uploading"
-#		s3cmd put $date.tar.bz2 $amazonsssurl
+		s3cmd put $date.tar.bz2 $amazonsssurl
 	else
 		echo "########## MD5 matches, skipping upload"
 	fi
