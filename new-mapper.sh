@@ -29,7 +29,8 @@
 mapsLight="cave overhead-nether overhead overheadnight players"
 mapsHeavy="fatiso-nether fatiso fatisonight"
  
-MAPPER="c10t-1.9-linux-x86/c10t -P c10t-1.9-linux-x86/newcolours.dat -M 100 --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf -m 4"
+MAPPER="c10t-git/build/c10t -M 100 --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf -m 4"
+#MAPPER="c10t -P c10t-1.9-linux-x86/newcolours.dat -M 100 --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf -m 4"
 REMOTEWORLD="stwalkerster@minecraft:/home/minecraft/multicraft/servers/server1/world/"
 REMOTEKEY="key_rsa"
 WORLD="mc1-world"
@@ -99,65 +100,54 @@ echo "Queue:" $maps
 echo
 echo "##### Starting render jobs"
 for i in $maps; do
-	
 	mapperopts=""
-	subworld=""
 	case $i in
 		overhead)
 			mapperopts=""
-			subworld=""
 			;;
 		overheadnight)
 			mapperopts="-n"
-			subworld=""
 			;;
 		overhead-nether)
 			mapperopts="--hell-mode -N"
-			subworld="DIM-1"
 			;;
 		fatiso)
 			mapperopts="-Z"
-			subworld=""
 			;;
 		fatiso-nether)
 			mapperopts="--hell-mode -Z -N"
-			subworld="DIM-1"
 			;;
 		fatisonight)
-			mapperopts="-Z -n"
-			subworld=""
+ 			mapperopts="-Z -n"
 			;;
 		fatiso90)
 			mapperopts="-Z -r90"
-			subworld=""
 			;;
 		fatiso180)
 			mapperopts="-Z -r180"
-			subworld=""
 			;;
 		fatiso270)
 			mapperopts="-Z -r270"
-			subworld=""
 			;;
 		cave)
 			mapperopts="-c"
-			subworld=""
 			;;
 		cave-fatiso)
 			mapperopts="-c -Z"
-			subworld=""
 			;;
 		players)
 			mapperopts="--show-players"
-			subworld=""
 			;;
 		players-nether)
 			mapperopts="--hell-mode -N --show-players"
-			subworld="DIM-1"
+			;;
+		*)
+			echo "########## warning: unrecognised map key: "$i
+			continue;
 			;;
 	esac
-	
-	command=$MAPPER" "$mapperopts" -w "$WORLD"/"$subworld" -o "$OUTPUT$i".png"
+
+	command=$MAPPER" "$mapperopts" -w "$WORLD"/ -o "$OUTPUT$i".png"
 	echo "########## "$i" = "$command
 	$command
 done
@@ -165,3 +155,4 @@ done
 echo "##### Cleaning up"
 
 rm -f c10t.log cookies.tmp swap.bin
+
