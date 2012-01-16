@@ -86,7 +86,7 @@ case $opt in
 	php updateWiki.php
 	;;
   r)
-	MAPPER=$MAPPER" -R 665 --center 340,532"
+	MAPPER=$MAPPER" -R 42 --center 21,33"
 	SUFFIX=""
 	;;
   \?)
