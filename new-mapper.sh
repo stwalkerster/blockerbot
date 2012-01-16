@@ -18,6 +18,7 @@
 # -l		Light maps
 # -s		Sync from game server
 # -w		Update backup list on-wiki
+# -r		Map core - smaller map
 
 # Requirements:
 # * c10t
@@ -35,12 +36,12 @@ REMOTEWORLD="stwalkerster@minecraft:/home/minecraft/multicraft/servers/server1/w
 REMOTEKEY="key_rsa"
 WORLD="mc1-world"
 OUTPUT="mc1/"
-
+SUFFIX="-full"
 amazonsssurl="s3://minecraft-worlds/smp/mc1/"
 
 maps=""
 
-while getopts ":bc:hlsw" opt; do
+while getopts ":bc:hlswr" opt; do
 case $opt in
   b)
 	echo "##### Running backup to S3"
@@ -83,6 +84,10 @@ case $opt in
   w)
 	echo "##### Updating wiki backup list"
 	php updateWiki.php
+	;;
+  r)
+	MAPPER=$MAPPER" -R 665 --center 340,532"
+	SUFFIX=""
 	;;
   \?)
     echo "Invalid option: -$OPTARG" >&2
@@ -147,7 +152,7 @@ for i in $maps; do
 			;;
 	esac
 
-	command=$MAPPER" "$mapperopts" -w "$WORLD"/ -o "$OUTPUT$i".png"
+	command=$MAPPER" "$mapperopts" -w "$WORLD"/ -o "$OUTPUT$i$SUFFIX".png"
 	echo "########## "$i" = "$command
 	$command
 done
