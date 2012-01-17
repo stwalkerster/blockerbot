@@ -1,14 +1,30 @@
 #!/bin/bash
 
 # crontab
-# 0 3 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 6 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl>/dev/null
-# 0 9 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 12 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 15 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 18 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 21 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sl >/dev/null
-# 0 0 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sbwlh >/dev/null
+#0 0 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sbwlh; ./new-mapper.sh -rlh >/dev/null
+#0 1 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 2 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 3 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 4 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 5 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 6 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sblwrh; ./new-mapper -rl >/dev/null
+#0 7 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 8 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 9 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 10 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 11 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 12 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sblwrh; ./new-mapper -rl >/dev/null
+#0 13 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 14 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 15 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 16 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 17 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 18 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -sblwrh; ./new-mapper -rl >/dev/null
+#0 19 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 20 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 21 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 22 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
+#0 23 * * * cd /home/stwalkerster/c10t/;./new-mapper.sh -slr >/dev/null
 
 
 # Usage:
@@ -86,7 +102,7 @@ case $opt in
 	php updateWiki.php
 	;;
   r)
-	MAPPER=$MAPPER" -R 42 --center 21,33"
+	MAPPER=$MAPPER" -R 42 --center -10,13"
 	SUFFIX=""
 	;;
   \?)
