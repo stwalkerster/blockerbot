@@ -45,6 +45,7 @@
 
 mapsLight="cave overhead-nether overhead overheadnight players"
 mapsHeavy="fatiso-nether fatiso fatisonight"
+mapsMedium="fatiso90 fatiso180 fatiso270"
  
 MAPPER="c10t-git/build/c10t -M 100 --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf -m 4"
 #MAPPER="c10t -P c10t-1.9-linux-x86/newcolours.dat -M 100 --ttf-path=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf -m 4"
@@ -57,7 +58,7 @@ amazonsssurl="s3://minecraft-worlds/smp/mc1/"
 
 maps=""
 
-while getopts ":bc:hlswr" opt; do
+while getopts ":bc:hlswrm" opt; do
 case $opt in
   b)
 	echo "##### Running backup to S3"
@@ -91,6 +92,10 @@ case $opt in
   l)
 	echo "##### Adding light maps to queue"
     maps=$maps" "$mapsLight
+	;;
+  m)
+	echo "##### Adding medium maps to queue"
+	maps=$maps" "$mapsMedium
 	;;
   s)
 	echo "##### Running sync from game server"
