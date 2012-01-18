@@ -4,12 +4,12 @@ $settings = array();
 
 $settings['username']="Stwalkerster";
 $settings['password']=""; // get from ext. file not in git.
+$settings['domain'] = "Helpmebot SSO";
 
-/*$pw = file_get_contents*/require_once("wiki.password");
+// retrieve password from other file.
+require_once("wiki.password");
 
-	
-	
-$api = "http://helpmebot.org.uk/w/api.php";
+$settings['api'] = "http://helpmebot.org.uk/w/api.php";
 $settings['cookiefile'] = "cookies.tmp";
 $settings['useragent'] = 'BlockerBot/1.0 ( +http://github.com/stwalkerster/blockerbot ) cURL/php';
 
@@ -35,12 +35,12 @@ function httpRequest($url, $post="") {
 }
 
 //////////// LOGIN
-$apiresult = httpRequest($api, array(
+$apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
 	"action" => "login",
 	"lgname" => $settings['username'],
 	"lgpassword" => $settings['password'],
-	"lgdomain" => "Helpmebot SSO" ,//////////////////////////////////////////////////////////////////////////
+	"lgdomain" => $settings['domain'],
 	));
 
 $apiresult = unserialize($apiresult);
@@ -49,12 +49,12 @@ echo "########## Login part 1:\n";
 if($apiresult["login"]["result"] != "NeedToken")
 	die( "Login: {$apiresult["login"]["result"]}");
 
-$apiresult = httpRequest($api, array(
+$apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
 	"action" => "login",
 	"lgname" => $settings['username'],
 	"lgpassword" => $settings['password'],
-	"lgdomain" => "Helpmebot SSO",
+	"lgdomain" => $settings['domain'],
 	"lgtoken" => $apiresult["login"]["token"],
 	));
 
@@ -66,7 +66,7 @@ if($apiresult["login"]["result"] != "Success")
 
 /////////////////////////////// GET EDIT TOKEN
 
-$apiresult = httpRequest($api, array(
+$apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
 	"action" => "query",
 	"prop" => "info",
@@ -88,7 +88,7 @@ if($token == ""){
 }
 ////////////////// EDIT
 
-$apiresult = httpRequest($api, array(
+$apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
 	"action" => "edit",
 	"token" => $token,
