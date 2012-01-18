@@ -18,6 +18,10 @@ $settings['useragent'] = 'BlockerBot/1.0 ( +http://github.com/stwalkerster/block
 // Block settings
 $settings['blockreason'] = "Go away.";
 $settings['blockexpiry'] = "4 weeks";
+$settings['anononly'] = "no";
+$settings['nocreate'] = "yes";
+$settings['autoblock'] = "no";
+$settings['noemail'] = "yes";
 
 // User list settings
 $settings['userfile'] = "list.txt";
@@ -109,14 +113,25 @@ if($token == ""){
 }
 ////////////////// BLOCK
 
-$apiresult = httpRequest($settings['api'], array(
+$blockdetails = array(
 	"format" => "php",
 	"action" => "block",
 	"token" => $token,
 	"reason" => $settings['blockreason'],
 	"expiry" => $settings['blockexpiry'],
 	"user" => $user
-	));
+	);
+
+if($settings['anononly'] == "yes")
+	$blockdetails['anononly'] = "yes";
+if($settings['nocreate'] == "yes")
+	$blockdetails['nocreate'] = "yes";
+if($settings['autoblock'] == "yes")
+	$blockdetails['autoblock'] = "yes";
+if($settings['noemail'] == "yes")
+	$blockdetails['noemail'] = "yes";
+	
+$apiresult = httpRequest($settings['api'], $blockdetails);
 
 $apiresult = unserialize($apiresult);
 
