@@ -54,13 +54,17 @@ function httpRequest($url, $post="") {
 }
 
 //////////// LOGIN
-$apiresult = httpRequest($settings['api'], array(
+$logindata = array(
 	"format" => "php",
 	"action" => "login",
 	"lgname" => $settings['username'],
-	"lgpassword" => $settings['password'],
-	"lgdomain" => $settings['domain'],
-	));
+	"lgpassword" => $settings['password']
+	);
+
+if($settings['domain'] != "")
+	$logindata["lgdomain"] = $settings['domain'];
+	
+$apiresult = httpRequest($settings['api'], $logindata); 
 
 $apiresult = unserialize($apiresult);
 echo "########## Login part 1:\n";
@@ -68,14 +72,10 @@ echo "########## Login part 1:\n";
 if($apiresult["login"]["result"] != "NeedToken")
 	die( "Login: {$apiresult["login"]["result"]}");
 
-$apiresult = httpRequest($settings['api'], array(
-	"format" => "php",
-	"action" => "login",
-	"lgname" => $settings['username'],
-	"lgpassword" => $settings['password'],
-	"lgdomain" => $settings['domain'],
-	"lgtoken" => $apiresult["login"]["token"],
-	));
+$settings["lgtoken"] = $apiresult["login"]["token"]	;
+	
+$apiresult = httpRequest($settings['api'], $logindata);
+
 
 $apiresult = unserialize($apiresult);
 echo "########## Login part 2:\n";
