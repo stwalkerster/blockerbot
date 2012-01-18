@@ -13,6 +13,17 @@ $settings['api'] = "http://helpmebot.org.uk/w/api.php";
 $settings['cookiefile'] = "cookies.tmp";
 $settings['useragent'] = 'BlockerBot/1.0 ( +http://github.com/stwalkerster/blockerbot ) cURL/php';
 
+$settings['blockreason'] = "Go away.";
+$settings['blockexpiry'] = "4 weeks";
+
+$settings['userfile'] = "list.txt";
+$settings['eol'] = "\r\n";
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$file = file_get_contents($settings['userfile']);
+$userlist = explode($settings['eol'], $file);
+
 function httpRequest($url, $post="") {
         global $settings;
 
@@ -64,43 +75,46 @@ echo "########## Login part 2:\n";
 if($apiresult["login"]["result"] != "Success")
 	die( "Login: {$apiresult["login"]["result"]}");
 
-/////////////////////////////// GET EDIT TOKEN
+foreach($userlist as $user)
+{
+/////////////////////////////// GET BLOCK TOKEN
 
 $apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
 	"action" => "query",
 	"prop" => "info",
-	"intoken" => "edit",
-//	"titles" => $page,
+	"intoken" => "block",
+	"titles" => $user,
 	));
 
 $apiresult = unserialize($apiresult);
-echo "########## Edit token:\n";
+echo "########## Token:\n";
 
 $token = "";
 foreach($apiresult["query"]["pages"] as $fragment)
-	if(isset($fragment["edittoken"]))
-		$token = $fragment["edittoken"];
+	if(isset($fragment["blocktoken"]))
+		$token = $fragment["blocktoken"];
 		
 if($token == ""){
 	print_r($apiresult);
 	die();
 }
-////////////////// EDIT
+////////////////// BLOCK
 
 $apiresult = httpRequest($settings['api'], array(
 	"format" => "php",
-	"action" => "edit",
+	"action" => "block",
 	"token" => $token,
-	"summary" => "Update data from Minecraft Backup script",
-	"text" => $text,
-//	"title" => $page
+	"reason" => $settings['blockreason'],
+	"expiry" => $settings['blockexpiry'],
+	"user" => $user
 	));
 
 $apiresult = unserialize($apiresult);
 
-echo "########## Edit completion:\n";
+echo "########## Block completion:\n";
 
-if($apiresult["edit"]["result"] != "Success")
-	die( "Login: {$apiresult["login"]["result"]}");
+if(!isset($apiresult["block"]))
+	die( "Block failed.");
 
+}
