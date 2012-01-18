@@ -2,22 +2,26 @@
 // initial configuration
 $settings = array();
 
+// wiki 
 $settings['username']="Stwalkerster";
-$settings['password']=""; // get from ext. file not in git.
+$settings['password']=""; // get from external file not in git.
 $settings['domain'] = "Helpmebot SSO";
 
 // retrieve password from other file.
 require_once("wiki.password");
 
+// General bot settings
 $settings['api'] = "http://helpmebot.org.uk/w/api.php";
 $settings['cookiefile'] = "cookies.tmp";
 $settings['useragent'] = 'BlockerBot/1.0 ( +http://github.com/stwalkerster/blockerbot ) cURL/php';
 
+// Block settings
 $settings['blockreason'] = "Go away.";
 $settings['blockexpiry'] = "4 weeks";
 
+// User list settings
 $settings['userfile'] = "list.txt";
-$settings['eol'] = "\r\n";
+$settings['eol'] = "\n"; // (windows: \r\n, linux: \n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,6 +81,10 @@ if($apiresult["login"]["result"] != "Success")
 
 foreach($userlist as $user)
 {
+
+if(trim($user) == "")
+	continue;
+
 /////////////////////////////// GET BLOCK TOKEN
 
 $apiresult = httpRequest($settings['api'], array(
